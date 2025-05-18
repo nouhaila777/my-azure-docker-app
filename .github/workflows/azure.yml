@@ -1,0 +1,32 @@
+name: Deploy Dockerized Node.js app to Azure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: myacr2025.azurecr.io/mydockerapp:latest
+
+    - name: Deploy to Azure Web App for Containers
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: 'my-docker-app-2025' # اسم App Service ديالك
+        images: 'myacr2025.azurecr.io/mydockerapp:latest'
