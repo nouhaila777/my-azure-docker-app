@@ -23,10 +23,10 @@ jobs:
       with:
         context: .
         push: true
-        tags: myacr2025.azurecr.io/mydockerapp:latest
+        tags: myacr20255.azurecr.io/mydockerapp:latest
 
     - name: Deploy to Azure Web App for Containers
       uses: azure/webapps-deploy@v3
       with:
-        app-name: 'my-docker-app-2025' # اسم App Service ديالك
-        images: 'myacr2025.azurecr.io/mydockerapp:latest'
+        app-name: 'my-docker-app-2025' # تأكدي حتى من هاد الاسم
+        images: 'myacr20255.azurecr.io/mydockerapp:latest'
